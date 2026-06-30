@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://example.github.io/copa-analytica/</loc>
+    <loc>https://ufrj-analytica.github.io/copa-analytica/</loc>
   </url>
   <url>
-    <loc>https://example.github.io/copa-analytica/jogos</loc>
+    <loc>https://ufrj-analytica.github.io/copa-analytica/jogos</loc>
   </url>
   <url>
-    <loc>https://example.github.io/copa-analytica/ranking</loc>
+    <loc>https://ufrj-analytica.github.io/copa-analytica/ranking</loc>
   </url>
   <url>
-    <loc>https://example.github.io/copa-analytica/modelos</loc>
+    <loc>https://ufrj-analytica.github.io/copa-analytica/modelos</loc>
   </url>
   <url>
-    <loc>https://example.github.io/copa-analytica/participantes</loc>
+    <loc>https://ufrj-analytica.github.io/copa-analytica/participantes</loc>
   </url>
   <url>
-    <loc>https://example.github.io/copa-analytica/sobre</loc>
+    <loc>https://ufrj-analytica.github.io/copa-analytica/sobre</loc>
   </url>
 </urlset>

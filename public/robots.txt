@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://example.github.io/copa-analytica/sitemap.xml
+Sitemap: https://ufrj-analytica.github.io/copa-analytica/sitemap.xml

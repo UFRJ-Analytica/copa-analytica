@@ -22,12 +22,12 @@ function getBasePath(mode: string, command: "build" | "serve") {
 }
 
 // https://vite.dev/config/
-export default defineConfig(({ mode, command }) => ({
-  base: getBasePath(mode, command),
+export default defineConfig({
+  base: "/copa-analytica/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-}))
+})

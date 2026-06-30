@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecionando...</title>
+    <script>
+      (function () {
+        var l = window.location
+        var isGithubPages = l.hostname.indexOf("github.io") !== -1
+        var segments = l.pathname.split("/")
+        var base = isGithubPages && segments.length > 1 ? "/" + segments[1] : ""
+        var path = l.pathname.replace(base, "") || "/"
+        var search = l.search ? "&q=" + encodeURIComponent(l.search.slice(1)) : ""
+        var target =
+          l.origin +
+          base +
+          "/?p=" +
+          encodeURIComponent(path) +
+          search +
+          l.hash
+        l.replace(target)
+      })()
+    </script>
+  </head>
+  <body></body>
+</html>

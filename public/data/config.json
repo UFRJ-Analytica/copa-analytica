@@ -1,0 +1,18 @@
+{
+  "sheet_id": "",
+  "sheet_name_participantes": "Participantes",
+  "sheet_name_modelos": "Modelos",
+  "sheet_name_jogos": "Jogos",
+  "sheet_name_previsoes": "Previsoes",
+  "sheet_name_resultados": "Resultados",
+  "sheet_name_pontuacao": "Pontuacao",
+  "sheet_name_ranking": "Ranking",
+  "torneio": "Copa do Mundo 2026",
+  "rodada_atual": "Quartas de final",
+  "site_url": "https://example.github.io/copa-analytica/",
+  "youtube_live_url": "",
+  "cache_ttl_minutos": 5,
+  "organization_name": "UFRJ Analytica",
+  "organization_url": "https://analytica.ufrj.br/",
+  "default_og_image": "/assets/og-image.png"
+}

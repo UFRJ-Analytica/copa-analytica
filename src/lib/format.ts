@@ -24,6 +24,14 @@ const percentFormatter = new Intl.NumberFormat("pt-BR", {
 })
 
 export function formatDate(value: string) {
+  const dateOnlyMatch = value.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+  if (dateOnlyMatch) {
+    const [, year, month, day] = dateOnlyMatch
+    return dateFormatter.format(
+      new Date(Number(year), Number(month) - 1, Number(day))
+    )
+  }
+
   const date = new Date(value)
   return Number.isNaN(date.getTime()) ? "—" : dateFormatter.format(date)
 }

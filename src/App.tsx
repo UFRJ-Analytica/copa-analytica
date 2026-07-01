@@ -3,7 +3,6 @@ import { getPageMeta } from "@/app/get-page-meta"
 import { PageShell } from "@/components/layout/page-shell"
 import { EmptyState } from "@/components/shared/empty-state"
 import { LoadingState } from "@/components/shared/loading-state"
-import { SourceBanner } from "@/components/shared/source-banner"
 import { AboutPage } from "@/features/about/about-page"
 import { GameDetailsPage } from "@/features/games/game-details-page"
 import { GamesPage } from "@/features/games/games-page"
@@ -20,7 +19,10 @@ export function App() {
   const route = useRoute()
   const { data, loading, error, reload } = useAppData()
   const meta = data ? getPageMeta(route, data) : null
-  usePageMeta(meta, data?.config.siteUrl ?? "https://example.com/")
+  usePageMeta(
+    meta,
+    data?.config.siteUrl ?? "https://ufrj-analytica.github.io/copa-analytica/"
+  )
 
   if (loading) {
     return <LoadingState />
@@ -28,15 +30,14 @@ export function App() {
 
   if (error || !data) {
     return (
-      <PageShell currentPath={route.path} sourceLabel="demo">
+      <PageShell currentPath={route.path}>
         <AppError message={error} onRetry={reload} />
       </PageShell>
     )
   }
 
   return (
-    <PageShell currentPath={route.path} sourceLabel={data.sourceLabel}>
-      <SourceBanner sourceLabel={data.sourceLabel} />
+    <PageShell currentPath={route.path}>
       {route.id === "home" ? <HomePage data={data} /> : null}
       {route.id === "games" ? <GamesPage data={data} /> : null}
       {route.id === "game-details" ? (

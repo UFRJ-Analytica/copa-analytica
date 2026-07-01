@@ -1,10 +1,21 @@
 import type { ReactNode } from "react"
 
-import { CloudArrowDown, Gauge, GlobeHemisphereWest, Rows } from "@phosphor-icons/react"
+import {
+  CloudArrowDown,
+  Gauge,
+  GlobeHemisphereWest,
+  Rows,
+} from "@phosphor-icons/react"
 
 import { PageIntro } from "@/components/shared/page-intro"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import type { AppData } from "@/types/domain"
 
 export function AboutPage({ data }: { data: AppData }) {
@@ -38,7 +49,8 @@ export function AboutPage({ data }: { data: AppData }) {
           <CardHeader>
             <CardTitle>Pipeline de dados</CardTitle>
             <CardDescription>
-              O frontend tenta ler o ranking pronto, mas tambem sabe recomputar o necessario se algumas abas auxiliares falharem.
+              O frontend tenta ler o ranking pronto, mas tambem sabe recomputar
+              o necessario se algumas abas auxiliares falharem.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4 lg:grid-cols-4">
@@ -62,7 +74,8 @@ export function AboutPage({ data }: { data: AppData }) {
           <CardHeader>
             <CardTitle>Configuracao esperada</CardTitle>
             <CardDescription>
-              O projeto sobe com dados demo. Quando voce preencher o `sheet_id`, a origem muda automaticamente.
+              O projeto exige um `sheet_id` configurado e le os dados publicados
+              pelo Google Sheets.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -87,7 +100,8 @@ export function AboutPage({ data }: { data: AppData }) {
           <CardHeader>
             <CardTitle>Checklist operacional</CardTitle>
             <CardDescription>
-              O minimo que precisa estar redondo para a publicacao final ficar tranquila.
+              O minimo que precisa estar redondo para a publicacao final ficar
+              tranquila.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3 md:grid-cols-2">
@@ -117,9 +131,7 @@ export function AboutPage({ data }: { data: AppData }) {
             <CloudArrowDown className="size-5 text-primary" />
             <span>
               Origem atual:{" "}
-              <strong className="text-foreground">
-                {data.sourceLabel === "demo" ? "dataset de demonstracao" : "Google Sheets"}
-              </strong>
+              <strong className="text-foreground">Google Sheets</strong>
             </span>
           </CardContent>
         </Card>
@@ -140,7 +152,9 @@ function FeatureCard({
   return (
     <Card>
       <CardHeader className="space-y-4">
-        <div className="w-fit rounded-full bg-primary/10 p-3 text-primary">{icon}</div>
+        <div className="w-fit rounded-full bg-primary/10 p-3 text-primary">
+          {icon}
+        </div>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>

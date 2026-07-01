@@ -49,7 +49,9 @@ function asWinner(value: string | number | boolean | null): WinnerSide {
   return "Mandante"
 }
 
-export function normalizeConfig(raw: Record<string, unknown> | null): SiteConfig {
+export function normalizeConfig(
+  raw: Record<string, unknown> | null
+): SiteConfig {
   if (!raw) {
     return defaultConfig
   }
@@ -62,23 +64,35 @@ export function normalizeConfig(raw: Record<string, unknown> | null): SiteConfig
       ),
       modelos: String(raw.sheet_name_modelos ?? defaultConfig.sheets.modelos),
       jogos: String(raw.sheet_name_jogos ?? defaultConfig.sheets.jogos),
-      previsoes: String(raw.sheet_name_previsoes ?? defaultConfig.sheets.previsoes),
-      resultados: String(raw.sheet_name_resultados ?? defaultConfig.sheets.resultados),
-      pontuacao: String(raw.sheet_name_pontuacao ?? defaultConfig.sheets.pontuacao),
+      previsoes: String(
+        raw.sheet_name_previsoes ?? defaultConfig.sheets.previsoes
+      ),
+      resultados: String(
+        raw.sheet_name_resultados ?? defaultConfig.sheets.resultados
+      ),
+      pontuacao: String(
+        raw.sheet_name_pontuacao ?? defaultConfig.sheets.pontuacao
+      ),
       ranking: String(raw.sheet_name_ranking ?? defaultConfig.sheets.ranking),
     },
     tournament: String(raw.torneio ?? defaultConfig.tournament),
     currentRound: String(raw.rodada_atual ?? defaultConfig.currentRound),
     siteUrl: String(raw.site_url ?? defaultConfig.siteUrl),
-    youtubeLiveUrl: String(raw.youtube_live_url ?? defaultConfig.youtubeLiveUrl),
+    youtubeLiveUrl: String(
+      raw.youtube_live_url ?? defaultConfig.youtubeLiveUrl
+    ),
     cacheTtlMinutes: Number(
       raw.cache_ttl_minutos ?? defaultConfig.cacheTtlMinutes
     ),
     organizationName: String(
       raw.organization_name ?? defaultConfig.organizationName
     ),
-    organizationUrl: String(raw.organization_url ?? defaultConfig.organizationUrl),
-    defaultOgImage: String(raw.default_og_image ?? defaultConfig.defaultOgImage),
+    organizationUrl: String(
+      raw.organization_url ?? defaultConfig.organizationUrl
+    ),
+    defaultOgImage: String(
+      raw.default_og_image ?? defaultConfig.defaultOgImage
+    ),
   }
 }
 
@@ -93,7 +107,8 @@ function normalizeDateValue(value: string | number | boolean | null) {
   )
 
   if (gvizMatch) {
-    const [, year, month, day, hour = "0", minute = "0", second = "0"] = gvizMatch
+    const [, year, month, day, hour = "0", minute = "0", second = "0"] =
+      gvizMatch
     const date = new Date(
       Number(year),
       Number(month),
@@ -179,16 +194,23 @@ export function normalizePredictions(rows: RawRecord[]): Prediction[] {
 }
 
 export function normalizeResults(rows: RawRecord[]): MatchResult[] {
-  return rows.map((row) => ({
-    gameId: asString(row.id_jogo),
-    homeTeam: asString(row.mandante),
-    awayTeam: asString(row.visitante),
-    actualHomeGoals: asNumber(row.gols_mandante_real),
-    actualAwayGoals: asNumber(row.gols_visitante_real),
-    actualWinner: asWinner(row.vencedor_real),
-    finishedAt: normalizeDateValue(row.datetime_fim),
-    notes: asString(row.observacoes),
-  }))
+  return rows
+    .filter(
+      (row) =>
+        asString(row.id_jogo) &&
+        asString(row.gols_mandante_real) &&
+        asString(row.gols_visitante_real)
+    )
+    .map((row) => ({
+      gameId: asString(row.id_jogo),
+      homeTeam: asString(row.mandante),
+      awayTeam: asString(row.visitante),
+      actualHomeGoals: asNumber(row.gols_mandante_real),
+      actualAwayGoals: asNumber(row.gols_visitante_real),
+      actualWinner: asWinner(row.vencedor_real),
+      finishedAt: normalizeDateValue(row.datetime_fim),
+      notes: asString(row.observacoes),
+    }))
 }
 
 export function normalizeScores(rows: RawRecord[]): ScoreRecord[] {

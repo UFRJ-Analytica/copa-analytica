@@ -23,12 +23,7 @@ export type WinnerSide = "Mandante" | "Visitante" | "Empate"
 
 export type GameStatus = "aberto" | "fechado" | "ao_vivo" | "encerrado"
 
-export type PredictionOutcome =
-  | "pending"
-  | "exact"
-  | "winner"
-  | "miss"
-  | "late"
+export type PredictionOutcome = "pending" | "exact" | "winner" | "miss" | "late"
 
 export interface SiteConfig {
   sheetId: string
@@ -205,6 +200,6 @@ export interface AppData {
   scores: ScoreRecord[]
   ranking: RankingEntry[]
   dashboard: DashboardStats
-  sourceLabel: "google-sheets" | "demo"
+  sourceLabel: "google-sheets"
   loadedAt: string
 }

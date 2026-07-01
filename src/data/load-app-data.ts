@@ -1,6 +1,5 @@
 import { readCache, writeCache } from "@/data/cache"
 import { composeAppData } from "@/data/derive"
-import { defaultConfig } from "@/data/default-config"
 import { fetchSheetRows } from "@/data/gviz"
 import {
   normalizeConfig,
@@ -12,20 +11,12 @@ import {
   normalizeResults,
   normalizeScores,
 } from "@/data/normalize"
-import {
-  sampleGames,
-  sampleModels,
-  sampleParticipants,
-  samplePredictions,
-  sampleResults,
-  sampleScores,
-} from "@/data/sample-data"
 import type { AppData } from "@/types/domain"
 
 async function fetchConfig() {
   const response = await fetch(`${import.meta.env.BASE_URL}data/config.json`)
   if (!response.ok) {
-    return defaultConfig
+    throw new Error("Nao foi possivel carregar public/data/config.json.")
   }
 
   const raw = (await response.json()) as Record<string, unknown>
@@ -41,31 +32,28 @@ async function loadFromSheets(): Promise<AppData> {
   }
 
   if (!config.sheetId) {
-    const demo = composeAppData({
-      config,
-      participants: sampleParticipants,
-      models: sampleModels,
-      games: sampleGames,
-      predictions: samplePredictions,
-      results: sampleResults,
-      scores: sampleScores,
-      ranking: [],
-      sourceLabel: "demo",
-    })
-    writeCache(cacheKey, demo)
-    return demo
+    throw new Error(
+      "sheet_id nao configurado em public/data/config.json. O app nao usa dados mockados."
+    )
   }
 
-  const [participantsRows, modelsRows, gamesRows, predictionsRows, resultsRows, scoreRows, rankingRows] =
-    await Promise.all([
-      fetchSheetRows(config.sheetId, config.sheets.participantes),
-      fetchSheetRows(config.sheetId, config.sheets.modelos),
-      fetchSheetRows(config.sheetId, config.sheets.jogos),
-      fetchSheetRows(config.sheetId, config.sheets.previsoes),
-      fetchSheetRows(config.sheetId, config.sheets.resultados),
-      fetchSheetRows(config.sheetId, config.sheets.pontuacao).catch(() => []),
-      fetchSheetRows(config.sheetId, config.sheets.ranking).catch(() => []),
-    ])
+  const [
+    participantsRows,
+    modelsRows,
+    gamesRows,
+    predictionsRows,
+    resultsRows,
+    scoreRows,
+    rankingRows,
+  ] = await Promise.all([
+    fetchSheetRows(config.sheetId, config.sheets.participantes),
+    fetchSheetRows(config.sheetId, config.sheets.modelos),
+    fetchSheetRows(config.sheetId, config.sheets.jogos),
+    fetchSheetRows(config.sheetId, config.sheets.previsoes),
+    fetchSheetRows(config.sheetId, config.sheets.resultados),
+    fetchSheetRows(config.sheetId, config.sheets.pontuacao).catch(() => []),
+    fetchSheetRows(config.sheetId, config.sheets.ranking).catch(() => []),
+  ])
 
   const dataset = composeAppData({
     config,
